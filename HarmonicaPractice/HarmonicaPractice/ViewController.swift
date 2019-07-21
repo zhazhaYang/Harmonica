@@ -13,6 +13,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     @IBOutlet weak var firstTableView: NSTableView!
     @IBOutlet weak var secondTableView: NSTableView!
     @IBOutlet weak var tabView: NSTabView!
+    @IBOutlet weak var addMusicScore: NSButton!
+    
     
     private let firstTableID = "FirstTable"
     private let secondTableID = "SecondTable"
@@ -67,16 +69,41 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                 }
                 return nil
     }
+    
+    func selectionShouldChange(in tableView: NSTableView) -> Bool {
+        return true
+    }
 
+    func tableViewSelectionIsChanging(_ notification: Notification) {
+        if firstTableView.identifier!.rawValue == (notification.object as? NSTableView)!.identifier!.rawValue {
+            secondTableView.deselectAll(nil)
+        } else {
+            firstTableView.deselectAll(nil)
+        }
+    }
+    
     func tableViewSelectionDidChange(_ notification: Notification) {
         let firSelectedRow = firstTableView.selectedRow
         let secSelectedRow = secondTableView.selectedRow
         if firSelectedRow >= 0 {
             tabView.selectTabViewItem(at: firSelectedRow)
-        } else {
+        } else if secSelectedRow >= 0 {
             tabView.selectTabViewItem(at: firstStr.count + secSelectedRow)
         }
     }
 
+    
+    @IBAction func addMusicScoreFromLocal(_ sender: NSButton) {
+        let chooseImage: NSOpenPanel = NSOpenPanel()
+        chooseImage.canChooseDirectories = false
+        chooseImage.canChooseFiles = true
+        chooseImage.allowsMultipleSelection = false
+        chooseImage.allowedFileTypes = ["png", "jpg"]
+        chooseImage.beginSheetModal(for: self.view.window!) { (response) in
+            if response.rawValue == NSApplication.ModalResponse.OK.rawValue {
+                let selectPath = chooseImage.url!.path
+            }
+        }
+    }
 }
 

@@ -12,6 +12,7 @@
 		2FBD22D222E19EFE00D9106D /* HarmonicaPractice.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD22D022E19EFD00D9106D /* HarmonicaPractice.xcdatamodeld */; };
 		2FBD22D422E19F0600D9106D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FBD22D322E19F0600D9106D /* Assets.xcassets */; };
 		2FBD22D722E19F0600D9106D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FBD22D522E19F0600D9106D /* Main.storyboard */; };
+		2FBD22E122E2E83000D9106D /* PracticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD22DF22E2E83000D9106D /* PracticeController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		2FBD22D622E19F0600D9106D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2FBD22D822E19F0600D9106D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FBD22D922E19F0600D9106D /* HarmonicaPractice.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HarmonicaPractice.entitlements; sourceTree = "<group>"; };
+		2FBD22DF22E2E83000D9106D /* PracticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 		2FBD22CB22E19EFD00D9106D /* HarmonicaPractice */ = {
 			isa = PBXGroup;
 			children = (
+				2FBD22DF22E2E83000D9106D /* PracticeController.swift */,
 				2FBD22CC22E19EFD00D9106D /* AppDelegate.swift */,
 				2FBD22CE22E19EFD00D9106D /* ViewController.swift */,
 				2FBD22D322E19F0600D9106D /* Assets.xcassets */,
@@ -138,6 +141,7 @@
 			files = (
 				2FBD22D222E19EFE00D9106D /* HarmonicaPractice.xcdatamodeld in Sources */,
 				2FBD22CF22E19EFD00D9106D /* ViewController.swift in Sources */,
+				2FBD22E122E2E83000D9106D /* PracticeController.swift in Sources */,
 				2FBD22CD22E19EFD00D9106D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
