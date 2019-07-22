@@ -12,9 +12,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     @IBOutlet weak var firstTableView: NSTableView!
     @IBOutlet weak var secondTableView: NSTableView!
-    @IBOutlet weak var tabView: NSTabView!
-    @IBOutlet weak var addMusicScore: NSButton!
-    
+    private var mainTabController: MainTabController?
+    @IBOutlet weak var containerView: NSView!
     
     private let firstTableID = "FirstTable"
     private let secondTableID = "SecondTable"
@@ -42,6 +41,12 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         }
     }
 
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if segue.identifier == "TOMAINTAB" {
+            mainTabController = segue.destinationController as? MainTabController
+        }
+    }
+    
     func numberOfRows(in tableView: NSTableView) -> Int {
         if tableView.identifier!.rawValue == firstTableID {
             return firstStr.count
@@ -86,24 +91,13 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         let firSelectedRow = firstTableView.selectedRow
         let secSelectedRow = secondTableView.selectedRow
         if firSelectedRow >= 0 {
-            tabView.selectTabViewItem(at: firSelectedRow)
+            print("First: \(firSelectedRow)")
+            mainTabController!.switchTabItem(tabItemIndex: firSelectedRow)
         } else if secSelectedRow >= 0 {
-            tabView.selectTabViewItem(at: firstStr.count + secSelectedRow)
+            print("Second: \(secSelectedRow)")
+            mainTabController!.switchTabItem(tabItemIndex:( secSelectedRow + firstStr.count))
         }
     }
-
     
-    @IBAction func addMusicScoreFromLocal(_ sender: NSButton) {
-        let chooseImage: NSOpenPanel = NSOpenPanel()
-        chooseImage.canChooseDirectories = false
-        chooseImage.canChooseFiles = true
-        chooseImage.allowsMultipleSelection = false
-        chooseImage.allowedFileTypes = ["png", "jpg"]
-        chooseImage.beginSheetModal(for: self.view.window!) { (response) in
-            if response.rawValue == NSApplication.ModalResponse.OK.rawValue {
-                let selectPath = chooseImage.url!.path
-            }
-        }
-    }
 }
 

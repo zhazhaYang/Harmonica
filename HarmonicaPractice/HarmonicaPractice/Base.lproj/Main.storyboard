@@ -681,7 +681,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-434" y="-365"/>
+            <point key="canvasLocation" x="-435" y="-538"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -702,18 +702,18 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-434" y="-136"/>
+            <point key="canvasLocation" x="-435" y="-317"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="HarmonicaPractice" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="1440" height="765"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autoresizesSubviews="NO" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" findBarPosition="aboveHorizontalRuler" translatesAutoresizingMaskIntoConstraints="NO" id="hs8-66-Zyf">
-                                <rect key="frame" x="0.0" y="682" width="160" height="83"/>
+                                <rect key="frame" x="0.0" y="187" width="160" height="83"/>
                                 <clipView key="contentView" copiesOnScroll="NO" id="mTx-RC-HH4">
                                     <rect key="frame" x="1" y="0.0" width="158" height="82"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -778,6 +778,9 @@
                                         </tableView>
                                     </subviews>
                                 </clipView>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="Gqr-VJ-vkf"/>
+                                </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="cXJ-dA-g5p">
                                     <rect key="frame" x="-100" y="-100" width="223" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -792,13 +795,13 @@
                                 </tableHeaderView>
                             </scrollView>
                             <scrollView autoresizesSubviews="NO" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="wxI-bo-ajD">
-                                <rect key="frame" x="0.0" y="0.0" width="160" height="681"/>
+                                <rect key="frame" x="0.0" y="0.0" width="160" height="186"/>
                                 <clipView key="contentView" copiesOnScroll="NO" id="tgy-al-HWC">
-                                    <rect key="frame" x="1" y="0.0" width="158" height="680"/>
+                                    <rect key="frame" x="1" y="0.0" width="158" height="185"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView identifier="SecondTable" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="Zxv-qW-n2j" viewBased="YES" id="vCz-ey-hIO">
-                                            <rect key="frame" x="0.0" y="0.0" width="158" height="655"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="158" height="160"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -870,117 +873,154 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
-                            <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="peX-SM-wYT">
-                                <rect key="frame" x="160" y="-10" width="1288" height="775"/>
-                                <font key="font" metaFont="system"/>
-                                <tabViewItems>
-                                    <tabViewItem label="Tab" identifier="" id="0ER-8g-DwX" userLabel="pratice">
-                                        <view key="view" id="RL2-vu-UhZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="1288" height="775"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cAA-df-jZ3">
-                                                    <rect key="frame" x="431" y="28" width="184" height="32"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="172" id="0vi-bA-70k"/>
-                                                    </constraints>
-                                                    <buttonCell key="cell" type="push" title="添加本地曲谱" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Tv7-C1-jtd">
-                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="system" size="16"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <action selector="addMusicScoreFromLocal:" target="XfG-lQ-9wD" id="YLd-YU-GkE"/>
-                                                    </connections>
-                                                </button>
-                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rxp-Tv-xis">
-                                                    <rect key="frame" x="637" y="28" width="184" height="32"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="172" id="XsX-T1-eBo"/>
-                                                    </constraints>
-                                                    <buttonCell key="cell" type="push" title="为曲谱添加伴奏" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wvb-EZ-hYw">
-                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="system" size="16"/>
-                                                    </buttonCell>
-                                                </button>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7xP-Q5-eL7">
-                                                    <rect key="frame" x="652" y="391" width="31" height="17"/>
-                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="练习" id="1Fv-sA-bkD">
-                                                        <font key="font" usesAppearanceFont="YES"/>
-                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="7xP-Q5-eL7" firstAttribute="top" secondItem="RL2-vu-UhZ" secondAttribute="top" constant="367" id="1bj-zP-QsY"/>
-                                                <constraint firstItem="cAA-df-jZ3" firstAttribute="baseline" secondItem="rxp-Tv-xis" secondAttribute="baseline" id="7TH-ik-Vvd"/>
-                                                <constraint firstAttribute="bottom" secondItem="cAA-df-jZ3" secondAttribute="bottom" constant="35" id="BrV-qx-JoL"/>
-                                                <constraint firstItem="cAA-df-jZ3" firstAttribute="leading" secondItem="RL2-vu-UhZ" secondAttribute="leading" constant="437" id="Wz3-f7-ttN"/>
-                                                <constraint firstAttribute="trailing" secondItem="7xP-Q5-eL7" secondAttribute="trailing" constant="607" id="i0s-ft-tVF"/>
-                                                <constraint firstItem="rxp-Tv-xis" firstAttribute="leading" secondItem="cAA-df-jZ3" secondAttribute="trailing" constant="34" id="oma-Bx-cII"/>
-                                            </constraints>
-                                        </view>
-                                    </tabViewItem>
-                                    <tabViewItem label="Item 1" identifier="" id="T02-yB-Ba5" userLabel="audio">
-                                        <view key="view" id="NUN-YD-Du6">
-                                            <rect key="frame" x="0.0" y="0.0" width="1288" height="775"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="woJ-vx-4AU">
-                                                    <rect key="frame" x="570" y="430" width="31" height="17"/>
-                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="录音" id="7v9-Ba-ZvF">
-                                                        <font key="font" usesAppearanceFont="YES"/>
-                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="woJ-vx-4AU" firstAttribute="top" secondItem="NUN-YD-Du6" secondAttribute="top" constant="328" id="1zf-fJ-ueP"/>
-                                                <constraint firstItem="woJ-vx-4AU" firstAttribute="leading" secondItem="NUN-YD-Du6" secondAttribute="leading" constant="572" id="NUR-a3-P25"/>
-                                            </constraints>
-                                        </view>
-                                    </tabViewItem>
-                                </tabViewItems>
-                            </tabView>
+                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="gLF-M7-N1e">
+                                <rect key="frame" x="159" y="0.0" width="321" height="270"/>
+                                <connections>
+                                    <segue destination="0gi-ll-YwV" kind="embed" identifier="TOMAINTAB" id="GFQ-2x-nEe"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="wxI-bo-ajD" secondAttribute="bottom" id="0uV-iP-hGg"/>
-                            <constraint firstItem="peX-SM-wYT" firstAttribute="top" secondItem="hs8-66-Zyf" secondAttribute="top" id="31r-Uc-z67"/>
                             <constraint firstItem="hs8-66-Zyf" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="7AY-QD-kMO"/>
+                            <constraint firstItem="gLF-M7-N1e" firstAttribute="bottom" secondItem="wxI-bo-ajD" secondAttribute="bottom" id="9Zx-tc-onA"/>
                             <constraint firstItem="hs8-66-Zyf" firstAttribute="trailing" secondItem="wxI-bo-ajD" secondAttribute="trailing" id="Lwa-lq-fwE"/>
                             <constraint firstItem="wxI-bo-ajD" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="84" id="PWx-fA-r0I"/>
-                            <constraint firstItem="peX-SM-wYT" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="160" id="TNd-Uq-VbP"/>
                             <constraint firstItem="wxI-bo-ajD" firstAttribute="top" secondItem="hs8-66-Zyf" secondAttribute="bottom" constant="1" id="UCd-FX-Jrg"/>
                             <constraint firstItem="hs8-66-Zyf" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="fdR-oR-qkJ"/>
-                            <constraint firstAttribute="bottom" secondItem="peX-SM-wYT" secondAttribute="bottom" constant="-10" id="i8h-Qn-vfn"/>
-                            <constraint firstItem="peX-SM-wYT" firstAttribute="leading" secondItem="hs8-66-Zyf" secondAttribute="trailing" id="nfk-1I-J8p"/>
-                            <constraint firstAttribute="trailing" secondItem="peX-SM-wYT" secondAttribute="trailing" constant="-8" id="q4v-Cb-w9x"/>
+                            <constraint firstAttribute="trailing" secondItem="gLF-M7-N1e" secondAttribute="trailing" id="hf7-QG-k5r"/>
+                            <constraint firstItem="gLF-M7-N1e" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="159" id="r9J-Gn-fb5"/>
                             <constraint firstItem="hs8-66-Zyf" firstAttribute="leading" secondItem="wxI-bo-ajD" secondAttribute="leading" id="tcr-0O-rLH"/>
+                            <constraint firstItem="gLF-M7-N1e" firstAttribute="top" secondItem="hs8-66-Zyf" secondAttribute="top" id="xM6-MK-9ss"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addMusicScore" destination="cAA-df-jZ3" id="Z7C-Ei-qls"/>
-                        <outlet property="firstTableView" destination="z95-z2-FwF" id="W2M-t3-aeL"/>
-                        <outlet property="secondTableView" destination="vCz-ey-hIO" id="awt-c5-rth"/>
-                        <outlet property="tabView" destination="peX-SM-wYT" id="5yK-q6-J8v"/>
+                        <outlet property="containerView" destination="gLF-M7-N1e" id="hXO-8j-KiR"/>
+                        <outlet property="firstTableView" destination="z95-z2-FwF" id="KIP-lg-4Zb"/>
+                        <outlet property="secondTableView" destination="vCz-ey-hIO" id="fRe-H8-BYq"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-376" y="484"/>
+            <point key="canvasLocation" x="-435" y="117"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="Deg-e4-wxn">
+        <!--Main Tab Controller-->
+        <scene sceneID="rAY-rl-DFI">
             <objects>
-                <viewController id="G0A-e3-ekl" sceneMemberID="viewController">
-                    <view key="view" id="Nmw-mN-2lT">
+                <tabViewController storyboardIdentifier="MAINTAB" selectedTabViewItemIndex="1" tabStyle="unspecified" canPropagateSelectedChildViewControllerTitle="NO" id="0gi-ll-YwV" customClass="MainTabController" customModule="HarmonicaPractice" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem id="TFE-y0-2sY" userLabel="Item 0"/>
+                        <tabViewItem id="uoM-CB-4av" userLabel="Item 1"/>
+                    </tabViewItems>
+                    <tabView key="tabView" type="noTabsNoBorder" id="KVH-QS-TBc">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <font key="font" metaFont="message"/>
+                        <tabViewItems>
+                            <tabViewItem label="Item 0" identifier="" id="UHQ-Uy-BQO">
+                                <view key="view" id="rbv-dL-Wzu">
+                                    <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </tabViewItem>
+                            <tabViewItem label="Item 1" identifier="" id="ATo-OS-OOg">
+                                <view key="view" id="xpb-nc-UTW">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </tabViewItem>
+                        </tabViewItems>
+                        <connections>
+                            <outlet property="delegate" destination="0gi-ll-YwV" id="CAA-oY-osM"/>
+                        </connections>
+                    </tabView>
+                    <connections>
+                        <outlet property="tabView" destination="KVH-QS-TBc" id="0yY-mM-JtI"/>
+                        <segue destination="7ID-wj-1LW" kind="relationship" relationship="tabItems" id="s6e-qu-nCZ"/>
+                        <segue destination="XeQ-Lr-CFp" kind="relationship" relationship="tabItems" id="XLm-ug-5lZ"/>
+                    </connections>
+                </tabViewController>
+                <customObject id="N9X-Qd-ZNs" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="93" y="117"/>
+        </scene>
+        <!--Practice View Controller-->
+        <scene sceneID="3mq-dU-5J0">
+            <objects>
+                <viewController id="7ID-wj-1LW" customClass="PracticeViewController" customModule="HarmonicaPractice" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Q64-16-uRj">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YV7-G2-vwg">
+                                <rect key="frame" x="65" y="141" width="321" height="19"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="您还未添加曲谱，请点击[添加本地曲谱]按钮！" id="PqP-UX-j7J">
+                                    <font key="font" metaFont="system" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6WH-Tl-x01">
+                                <rect key="frame" x="66" y="13" width="161" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="149" id="QdW-cN-FiS"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="添加本地曲谱" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lfT-Ny-xz4">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="addMusicScore:" target="7ID-wj-1LW" id="h1b-pg-mfR"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yh1-yq-4WQ">
+                                <rect key="frame" x="221" y="13" width="164" height="32"/>
+                                <buttonCell key="cell" type="push" title="为曲谱添加伴奏" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mpN-OT-qmK">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="6WH-Tl-x01" firstAttribute="baseline" secondItem="yh1-yq-4WQ" secondAttribute="baseline" id="4La-ri-fQc"/>
+                            <constraint firstAttribute="bottom" secondItem="6WH-Tl-x01" secondAttribute="bottom" constant="20" symbolic="YES" id="BUJ-nA-cmn"/>
+                            <constraint firstItem="YV7-G2-vwg" firstAttribute="centerX" secondItem="Q64-16-uRj" secondAttribute="centerX" id="CMh-9I-l8l"/>
+                            <constraint firstItem="6WH-Tl-x01" firstAttribute="leading" secondItem="Q64-16-uRj" secondAttribute="leading" constant="72" id="Fzi-SH-hCZ"/>
+                            <constraint firstItem="YV7-G2-vwg" firstAttribute="centerY" secondItem="Q64-16-uRj" secondAttribute="centerY" id="LK1-7y-nE7"/>
+                            <constraint firstAttribute="trailing" secondItem="yh1-yq-4WQ" secondAttribute="trailing" constant="71" id="MxU-h7-VOY"/>
+                            <constraint firstItem="yh1-yq-4WQ" firstAttribute="leading" secondItem="6WH-Tl-x01" secondAttribute="trailing" constant="6" id="PHX-oa-Xv5"/>
+                        </constraints>
                     </view>
                 </viewController>
-                <customObject id="tGy-mv-u2r" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="N8i-A0-kHg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="721" y="-141"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="WTo-2R-Ysw">
+            <objects>
+                <viewController title="View Controller" id="XeQ-Lr-CFp" sceneMemberID="viewController">
+                    <view key="view" id="4kl-gg-aO9">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dMY-aA-b2u">
+                                <rect key="frame" x="203" y="142" width="45" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="AUDIO" id="XN7-KE-oMG">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="dMY-aA-b2u" firstAttribute="centerX" secondItem="4kl-gg-aO9" secondAttribute="centerX" id="7eE-s5-KdG"/>
+                            <constraint firstItem="dMY-aA-b2u" firstAttribute="centerY" secondItem="4kl-gg-aO9" secondAttribute="centerY" id="lBE-nJ-h3R"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="npH-Kp-PYg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="721" y="231"/>
         </scene>
     </scenes>
     <resources>
