@@ -91,10 +91,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         let firSelectedRow = firstTableView.selectedRow
         let secSelectedRow = secondTableView.selectedRow
         if firSelectedRow >= 0 {
-            print("First: \(firSelectedRow)")
             mainTabController!.switchTabItem(tabItemIndex: firSelectedRow)
         } else if secSelectedRow >= 0 {
-            print("Second: \(secSelectedRow)")
             mainTabController!.switchTabItem(tabItemIndex:( secSelectedRow + firstStr.count))
         }
     }

@@ -84,7 +84,7 @@ class PracticeViewController: NSViewController {
     func alertRemind(message: String) {
         let alert = NSAlert()
         alert.messageText = message
-        alert.addButton(withTitle: "我知道啦")
+        alert.addButton(withTitle: "我知道了")
         alert.runModal()
     }
     
@@ -177,7 +177,7 @@ extension PracticeViewController: NSComboBoxDelegate, NSComboBoxDataSource, NSTa
         name = self.comboBox.objectValueOfSelectedItem as? String
         praticeData = selectFromCoreData(byName: name)
         let image = NSImage(data: praticeData.score as Data)
-        self.imageView.image = image
+        self.imageView.image = image!
     }
     
     func comboBoxSelectionDidChange(_ notification: Notification) {
