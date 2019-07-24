@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2F6FEB7C22E587120052E5F9 /* PracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FEB7B22E587120052E5F9 /* PracticeViewController.swift */; };
+		2F6FEBBD22E6EB430052E5F9 /* SructData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FEBBC22E6EB430052E5F9 /* SructData.swift */; };
+		2F6FEBBF22E7EFC10052E5F9 /* ComboBoxSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FEBBE22E7EFC10052E5F9 /* ComboBoxSelected.swift */; };
 		2FBD22CD22E19EFD00D9106D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD22CC22E19EFD00D9106D /* AppDelegate.swift */; };
 		2FBD22CF22E19EFD00D9106D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD22CE22E19EFD00D9106D /* ViewController.swift */; };
 		2FBD22D222E19EFE00D9106D /* HarmonicaPractice.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD22D022E19EFD00D9106D /* HarmonicaPractice.xcdatamodeld */; };
@@ -18,6 +20,8 @@
 
 /* Begin PBXFileReference section */
 		2F6FEB7B22E587120052E5F9 /* PracticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeViewController.swift; sourceTree = "<group>"; };
+		2F6FEBBC22E6EB430052E5F9 /* SructData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SructData.swift; sourceTree = "<group>"; };
+		2F6FEBBE22E7EFC10052E5F9 /* ComboBoxSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComboBoxSelected.swift; sourceTree = "<group>"; };
 		2FBD22C922E19EFD00D9106D /* HarmonicaPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HarmonicaPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FBD22CC22E19EFD00D9106D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FBD22CE22E19EFD00D9106D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +48,7 @@
 			isa = PBXGroup;
 			children = (
 				2F6FEB7B22E587120052E5F9 /* PracticeViewController.swift */,
+				2F6FEBBE22E7EFC10052E5F9 /* ComboBoxSelected.swift */,
 			);
 			path = PracticePage;
 			sourceTree = "<group>";
@@ -84,6 +89,7 @@
 				2FBD22D922E19F0600D9106D /* HarmonicaPractice.entitlements */,
 				2FBD22D022E19EFD00D9106D /* HarmonicaPractice.xcdatamodeld */,
 				2FBD231A22E559DF00D9106D /* MainTabController.swift */,
+				2F6FEBBC22E6EB430052E5F9 /* SructData.swift */,
 			);
 			path = HarmonicaPractice;
 			sourceTree = "<group>";
@@ -159,6 +165,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FBD22D222E19EFE00D9106D /* HarmonicaPractice.xcdatamodeld in Sources */,
+				2F6FEBBF22E7EFC10052E5F9 /* ComboBoxSelected.swift in Sources */,
+				2F6FEBBD22E6EB430052E5F9 /* SructData.swift in Sources */,
 				2FBD22CF22E19EFD00D9106D /* ViewController.swift in Sources */,
 				2FBD231B22E559DF00D9106D /* MainTabController.swift in Sources */,
 				2F6FEB7C22E587120052E5F9 /* PracticeViewController.swift in Sources */,

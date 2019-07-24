@@ -951,45 +951,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YV7-G2-vwg">
-                                <rect key="frame" x="65" y="141" width="321" height="19"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="您还未添加曲谱，请点击[添加本地曲谱]按钮！" id="PqP-UX-j7J">
-                                    <font key="font" metaFont="system" size="15"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6WH-Tl-x01">
-                                <rect key="frame" x="66" y="13" width="161" height="32"/>
+                                <rect key="frame" x="285" y="254" width="55" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="149" id="QdW-cN-FiS"/>
+                                    <constraint firstAttribute="width" constant="43" id="FB1-y1-Jtu"/>
+                                    <constraint firstAttribute="height" constant="21" id="NQ3-op-dWz"/>
                                 </constraints>
                                 <buttonCell key="cell" type="push" title="添加本地曲谱" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lfT-Ny-xz4">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="addMusicScore:" target="7ID-wj-1LW" id="h1b-pg-mfR"/>
+                                    <action selector="addMusicScoreClicked:" target="7ID-wj-1LW" id="3ne-eM-b9B"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yh1-yq-4WQ">
-                                <rect key="frame" x="221" y="13" width="164" height="32"/>
-                                <buttonCell key="cell" type="push" title="为曲谱添加伴奏" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mpN-OT-qmK">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
+                            <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nlx-ve-Wcj">
+                                <rect key="frame" x="97" y="257" width="183" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="3WQ-nd-3gU"/>
+                                    <constraint firstAttribute="height" constant="22" id="ynP-AZ-lif"/>
+                                </constraints>
+                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="3" id="bQc-xu-t2s">
+                                    <font key="font" metaFont="system" size="15"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </comboBoxCell>
+                            </comboBox>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YV7-G2-vwg">
+                                <rect key="frame" x="95" y="141" width="260" height="19"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="您还未添加曲谱，请点击[添加]按钮！" id="PqP-UX-j7J">
+                                    <font key="font" metaFont="system" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UZ9-LN-8ic">
+                                <rect key="frame" x="20" y="20" width="410" height="230"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="NGl-hb-Y5g"/>
+                            </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="6WH-Tl-x01" firstAttribute="baseline" secondItem="yh1-yq-4WQ" secondAttribute="baseline" id="4La-ri-fQc"/>
-                            <constraint firstAttribute="bottom" secondItem="6WH-Tl-x01" secondAttribute="bottom" constant="20" symbolic="YES" id="BUJ-nA-cmn"/>
-                            <constraint firstItem="YV7-G2-vwg" firstAttribute="centerX" secondItem="Q64-16-uRj" secondAttribute="centerX" id="CMh-9I-l8l"/>
-                            <constraint firstItem="6WH-Tl-x01" firstAttribute="leading" secondItem="Q64-16-uRj" secondAttribute="leading" constant="72" id="Fzi-SH-hCZ"/>
-                            <constraint firstItem="YV7-G2-vwg" firstAttribute="centerY" secondItem="Q64-16-uRj" secondAttribute="centerY" id="LK1-7y-nE7"/>
-                            <constraint firstAttribute="trailing" secondItem="yh1-yq-4WQ" secondAttribute="trailing" constant="71" id="MxU-h7-VOY"/>
-                            <constraint firstItem="yh1-yq-4WQ" firstAttribute="leading" secondItem="6WH-Tl-x01" secondAttribute="trailing" constant="6" id="PHX-oa-Xv5"/>
+                            <constraint firstItem="6WH-Tl-x01" firstAttribute="leading" secondItem="nlx-ve-Wcj" secondAttribute="trailing" constant="14" id="0Ww-bO-cIv"/>
+                            <constraint firstItem="UZ9-LN-8ic" firstAttribute="leading" secondItem="Q64-16-uRj" secondAttribute="leading" constant="20" symbolic="YES" id="9cI-Xk-TX6"/>
+                            <constraint firstItem="YV7-G2-vwg" firstAttribute="centerY" secondItem="Q64-16-uRj" secondAttribute="centerY" id="Cvg-6h-zPv"/>
+                            <constraint firstItem="YV7-G2-vwg" firstAttribute="centerX" secondItem="Q64-16-uRj" secondAttribute="centerX" id="Qjt-da-Egb"/>
+                            <constraint firstItem="nlx-ve-Wcj" firstAttribute="top" secondItem="Q64-16-uRj" secondAttribute="top" constant="17" id="Rmu-VP-eKd"/>
+                            <constraint firstItem="UZ9-LN-8ic" firstAttribute="top" secondItem="6WH-Tl-x01" secondAttribute="bottom" constant="11" id="VBd-Yk-Wfb"/>
+                            <constraint firstItem="nlx-ve-Wcj" firstAttribute="leading" secondItem="YV7-G2-vwg" secondAttribute="leading" id="XcC-Mi-KBC"/>
+                            <constraint firstAttribute="bottom" secondItem="UZ9-LN-8ic" secondAttribute="bottom" constant="20" symbolic="YES" id="iCn-IF-xh9"/>
+                            <constraint firstItem="UZ9-LN-8ic" firstAttribute="centerX" secondItem="YV7-G2-vwg" secondAttribute="centerX" id="qR3-5z-EXY"/>
+                            <constraint firstItem="nlx-ve-Wcj" firstAttribute="bottom" secondItem="6WH-Tl-x01" secondAttribute="bottom" id="rnZ-bI-XUt"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="comboBox" destination="nlx-ve-Wcj" id="k2G-rp-ZIk"/>
+                        <outlet property="imageView" destination="UZ9-LN-8ic" id="dMy-PN-oUK"/>
+                        <outlet property="noneTipText" destination="YV7-G2-vwg" id="MOU-ss-Zxh"/>
+                    </connections>
                 </viewController>
                 <customObject id="N8i-A0-kHg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
