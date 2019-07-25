@@ -53,6 +53,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         }
         return secondStr.count
     }
+    
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
                 var cellID: String? = nil
                 var str: String? = nil

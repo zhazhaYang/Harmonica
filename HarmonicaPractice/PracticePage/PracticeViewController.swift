@@ -18,44 +18,58 @@ class PracticeViewController: NSViewController {
     private let entityName = "Practice"
     private let nameForKey = "name"
     private let scoreForKey = "score"
+    private let acc1NameForKey = "acc1_name"
+    private let acc2NameForKey = "acc2_name"
     private let accompany1ForKey = "accompany1"
     private let accompany2ForKey = "accompany2"
     
-    private var data: PracticeData!
     private var createName: String!
     private var createScore: NSData!
+    
+    private var accompanyController: AccompanyController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        if(retrieveName()) {
-            self.noneTipText.isHidden = true
-            self.chooseDataToShow(atIndex: 0)
+    }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "ToPlayAccompany") {
+            accompanyController = segue.destinationController as? AccompanyController
+            accompanyController.loadView()
+            if(retrieveName()) {
+                self.noneTipText.isHidden = true
+                self.chooseDataToShow(atIndex: 0)
+            }
+            comboBox.delegate = self
         }
-        comboBox.delegate = self
     }
     
     @IBAction func addMusicScoreClicked(_ sender: NSButton) {
-        let alert = NSAlert()
-        alert.informativeText = "添加曲谱"
-        alert.messageText = "请输入名称"
-        alert.addButton(withTitle: "取消")
-        alert.addButton(withTitle: "下一步")
-        let nameText = NSTextField(string: "")
-        nameText.frame = NSRect(x:0, y:0, width: 300, height: 25)
-        nameText.font = NSFont.labelFont(ofSize: 16)
-        alert.accessoryView = nameText
-        let pressed = alert.runModal()
-        
-        if pressed == NSApplication.ModalResponse.alertSecondButtonReturn {
-            createName = nameText.stringValue
-            if createName == "" {
-                alertRemind(message: "内容不能为空！")
-                return
-            }
+            self.createName = enterTextFieldAlert(message: "添加曲谱", infomative: "请输入名称：")
+        if self.createName != nil {
             openPanel(types: ["jpg", "png"])
         }
-        
+    }
+    
+    
+    @IBAction func deleteMusicScoreClicked(_ sender: NSButton) {
+        if self.comboBox.numberOfItems == 0 { return }
+        if ensureAlert(message: "删除曲谱", infomativeText: "删除曲谱的操作连同该曲谱的伴奏也会删除，你确定吗？") {
+            if self.deleteInCoreData(byname: self.comboBox.objectValueOfSelectedItem as! String) {
+                alertRemind(message: "删除成功！")
+                if self.comboBox.numberOfItems == 1 {
+                    self.comboBox.stringValue = ""
+                    self.imageView.image = nil
+                    self.noneTipText.isHidden = false
+                } else if self.comboBox.numberOfItems > 1 {
+                    self.chooseDataToShow(atIndex: 0)
+                }
+                self.comboBox.removeItem(at: self.comboBox.indexOfSelectedItem)
+            } else {
+                alertRemind(message: "删除失败！")
+            }
+        }
     }
     
     private func openPanel(types typesName: [String]) {
@@ -70,7 +84,7 @@ class PracticeViewController: NSViewController {
                 self.createScore = NSData(contentsOf: selectedURL)
                 self.noneTipText.isHidden = true
                 if self.saveMusiceScore(scoreName: self.createName, withImage: self.createScore) == false {
-                    self.alertRemind(message: "添加失败！")
+                    alertRemind(message: "添加失败！")
                     return
                 } else {
                     self.comboBox.addItem(withObjectValue: self.createName)
@@ -79,13 +93,6 @@ class PracticeViewController: NSViewController {
                 }
             }
         }
-    }
-    
-    func alertRemind(message: String) {
-        let alert = NSAlert()
-        alert.messageText = message
-        alert.addButton(withTitle: "我知道了")
-        alert.runModal()
     }
     
     private func saveMusiceScore(scoreName name: String,withImage score: NSData) -> Bool {
@@ -124,6 +131,27 @@ class PracticeViewController: NSViewController {
         return true
     }
     
+    private func deleteInCoreData(byname name: String) -> Bool {
+        guard let appDelegate = NSApplication.shared.delegate as? AppDelegate else { return false }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entityName)
+        fetchRequest.predicate = NSPredicate(format: " name = %@ ", name)
+        do {
+            let fetched = try managedContext.fetch(fetchRequest)
+            let objectDelete = fetched[0] as! NSManagedObject
+            managedContext.delete(objectDelete)
+            do {
+                try managedContext.save()
+            } catch {
+                return false
+            }
+        } catch {
+            return false
+        }
+        
+        return true
+    }
+    
     private func selectFromCoreData(byName name: String) -> PracticeData? {
         guard let appDelegate = NSApplication.shared.delegate as? AppDelegate else { return nil }
         
@@ -137,6 +165,8 @@ class PracticeViewController: NSViewController {
             let object = context[0] as! NSManagedObject
             practice.name = name
             practice.score = object.value(forKey: self.scoreForKey) as? NSData
+            practice.acc1_name = object.value(forKey: self.acc1NameForKey) as? String
+            practice.acc2_name = object.value(forKey: self.acc2NameForKey) as? String
             practice.accompany1 = object.value(forKey: self.accompany1ForKey) as? NSData
             practice.accompany2 = object.value(forKey: self.accompany2ForKey) as? NSData
         } catch {
@@ -145,39 +175,20 @@ class PracticeViewController: NSViewController {
         return practice
     }
     
-    private func deletion(byName name: String) -> Bool {
-        guard let appDelegate = NSApplication.shared.delegate as? AppDelegate else { return false }
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entityName)
-        fetchRequest.predicate = NSPredicate(format: "name = %@", name)
-        do {
-            let context = try managedContext.fetch(fetchRequest)
-            let objectToDelete = context[0] as! NSManagedObject
-            managedContext.delete(objectToDelete)
-            do {
-                try managedContext.save()
-            } catch {
-                return false
-            }
-        } catch {
-            return false
-        }
-        return true
-    }
-    
 }
 
 extension PracticeViewController: NSComboBoxDelegate, NSComboBoxDataSource, NSTabViewDelegate {
     
     func chooseDataToShow(atIndex at: Int) {
-        var praticeData: PracticeData!
+        var practiceData: PracticeData!
         var name: String!
         self.comboBox.selectItem(at: at)
         name = self.comboBox.objectValueOfSelectedItem as? String
-        praticeData = selectFromCoreData(byName: name)
-        let image = NSImage(data: praticeData.score as Data)
+        practiceData = selectFromCoreData(byName: name)
+        let image = NSImage(data: practiceData.score as Data)
         self.imageView.image = image!
+        self.accompanyController.setAccompanyData(accData: practiceData)
+        self.accompanyController.dataForAccompanyComboBox(accData: practiceData)
     }
     
     func comboBoxSelectionDidChange(_ notification: Notification) {

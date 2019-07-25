@@ -17,3 +17,4 @@ struct PracticeData {
     public var acc2_name: String!
     public var accompany2: NSData!
 }
+
