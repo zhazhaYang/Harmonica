@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2F6FEB7C22E587120052E5F9 /* PracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FEB7B22E587120052E5F9 /* PracticeViewController.swift */; };
-		2F6FEBBD22E6EB430052E5F9 /* SructData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FEBBC22E6EB430052E5F9 /* SructData.swift */; };
+		2F6FEBBD22E6EB430052E5F9 /* PracticeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FEBBC22E6EB430052E5F9 /* PracticeData.swift */; };
 		2F7F210222E9569600223010 /* PopupWindows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F210122E9569600223010 /* PopupWindows.swift */; };
+		2F7F212422EAC12C00223010 /* SoundData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F212322EAC12C00223010 /* SoundData.swift */; };
+		2F7F212822EAC33600223010 /* SoundRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F212722EAC33600223010 /* SoundRecordController.swift */; };
 		2FBD22CD22E19EFD00D9106D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD22CC22E19EFD00D9106D /* AppDelegate.swift */; };
 		2FBD22CF22E19EFD00D9106D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD22CE22E19EFD00D9106D /* ViewController.swift */; };
 		2FBD22D222E19EFE00D9106D /* HarmonicaPractice.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD22D022E19EFD00D9106D /* HarmonicaPractice.xcdatamodeld */; };
@@ -21,8 +23,10 @@
 
 /* Begin PBXFileReference section */
 		2F6FEB7B22E587120052E5F9 /* PracticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeViewController.swift; sourceTree = "<group>"; };
-		2F6FEBBC22E6EB430052E5F9 /* SructData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SructData.swift; sourceTree = "<group>"; };
+		2F6FEBBC22E6EB430052E5F9 /* PracticeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeData.swift; sourceTree = "<group>"; };
 		2F7F210122E9569600223010 /* PopupWindows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupWindows.swift; sourceTree = "<group>"; };
+		2F7F212322EAC12C00223010 /* SoundData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundData.swift; sourceTree = "<group>"; };
+		2F7F212722EAC33600223010 /* SoundRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundRecordController.swift; sourceTree = "<group>"; };
 		2FBD22C922E19EFD00D9106D /* HarmonicaPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HarmonicaPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FBD22CC22E19EFD00D9106D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FBD22CE22E19EFD00D9106D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +53,7 @@
 		2F6FEB7A22E586750052E5F9 /* PracticePage */ = {
 			isa = PBXGroup;
 			children = (
+				2F6FEBBC22E6EB430052E5F9 /* PracticeData.swift */,
 				2F6FEB7B22E587120052E5F9 /* PracticeViewController.swift */,
 				2FDD26C222E8765800FF4557 /* AccompanyController.swift */,
 				2F7F210122E9569600223010 /* PopupWindows.swift */,
@@ -59,6 +64,8 @@
 		2F6FEB7D22E58EAD0052E5F9 /* SoundRecordingPage */ = {
 			isa = PBXGroup;
 			children = (
+				2F7F212322EAC12C00223010 /* SoundData.swift */,
+				2F7F212722EAC33600223010 /* SoundRecordController.swift */,
 			);
 			path = SoundRecordingPage;
 			sourceTree = "<group>";
@@ -92,7 +99,6 @@
 				2FBD22D922E19F0600D9106D /* HarmonicaPractice.entitlements */,
 				2FBD22D022E19EFD00D9106D /* HarmonicaPractice.xcdatamodeld */,
 				2FBD231A22E559DF00D9106D /* MainTabController.swift */,
-				2F6FEBBC22E6EB430052E5F9 /* SructData.swift */,
 			);
 			path = HarmonicaPractice;
 			sourceTree = "<group>";
@@ -129,6 +135,11 @@
 				TargetAttributes = {
 					2FBD22C822E19EFD00D9106D = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -169,8 +180,10 @@
 			files = (
 				2F7F210222E9569600223010 /* PopupWindows.swift in Sources */,
 				2FBD22D222E19EFE00D9106D /* HarmonicaPractice.xcdatamodeld in Sources */,
-				2F6FEBBD22E6EB430052E5F9 /* SructData.swift in Sources */,
+				2F6FEBBD22E6EB430052E5F9 /* PracticeData.swift in Sources */,
 				2FBD22CF22E19EFD00D9106D /* ViewController.swift in Sources */,
+				2F7F212822EAC33600223010 /* SoundRecordController.swift in Sources */,
+				2F7F212422EAC12C00223010 /* SoundData.swift in Sources */,
 				2FBD231B22E559DF00D9106D /* MainTabController.swift in Sources */,
 				2F6FEB7C22E587120052E5F9 /* PracticeViewController.swift in Sources */,
 				2FBD22CD22E19EFD00D9106D /* AppDelegate.swift in Sources */,

@@ -12,9 +12,11 @@ struct PracticeData {
 
     public var name: String!
     public var score: NSData!
-    public var acc1_name: String!
-    public var accompany1: NSData!
-    public var acc2_name: String!
-    public var accompany2: NSData!
+}
+
+struct AccompanyData {
+    var score_name: String!
+    var acc_name: String!
+    var accompany: NSData!
 }
 

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Accompany" representedClassName="Accompany" syncable="YES" codeGenerationType="class">
+        <attribute name="acc_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="accompany" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="score_name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Practice" inverseName="toAccompany" inverseEntity="Practice" syncable="YES"/>
+    </entity>
     <entity name="Practice" representedClassName="Practice" syncable="YES" codeGenerationType="class">
-        <attribute name="acc1_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="acc2_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="accompany1" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="accompany2" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="score" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="toAccompany" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Accompany" inverseName="owner" inverseEntity="Accompany" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Practice" positionX="-72.0390625" positionY="-20.00390625" width="128" height="133"/>
+        <element name="Practice" positionX="-72.0390625" positionY="-20.00390625" width="128" height="88"/>
+        <element name="Accompany" positionX="101.07421875" positionY="18.99609375" width="128" height="103"/>
     </elements>
 </model>

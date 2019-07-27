@@ -56,22 +56,34 @@ class PracticeViewController: NSViewController {
     @IBAction func deleteMusicScoreClicked(_ sender: NSButton) {
         if self.comboBox.numberOfItems == 0 { return }
         if ensureAlert(message: "删除曲谱", infomativeText: "删除曲谱的操作连同该曲谱的伴奏也会删除，你确定吗？") {
-            if self.deleteInCoreData(byname: self.comboBox.objectValueOfSelectedItem as! String) {
-                alertRemind(message: "删除成功！")
+            let scoreName = self.comboBox.objectValueOfSelectedItem as! String
+            if self.deleteInCoreData(byname: scoreName) {
+                if self.accompanyController.deleteAccompanyByScore(scoreName: scoreName) {
+                    alertRemind(message: "删除成功！")
+                } else {
+                    print("删除伴奏失败了！")
+                }
                 if self.comboBox.numberOfItems == 1 {
                     self.comboBox.stringValue = ""
                     self.imageView.image = nil
                     self.noneTipText.isHidden = false
+                    self.accompanyController.setAudioPlayer(accompany: nil)
                 } else if self.comboBox.numberOfItems > 1 {
                     self.chooseDataToShow(atIndex: 0)
                 }
                 self.comboBox.removeItem(at: self.comboBox.indexOfSelectedItem)
             } else {
-                alertRemind(message: "删除失败！")
+                alertRemind(message: "删除失败, 请稍后再试！")
             }
         }
     }
     
+}
+
+
+//MARK: - Practice Core Data Operation
+
+extension PracticeViewController {
     private func openPanel(types typesName: [String]) {
         let openPanel: NSOpenPanel = NSOpenPanel()
         openPanel.canChooseDirectories = false
@@ -127,7 +139,7 @@ class PracticeViewController: NSViewController {
         } catch {
             return false
         }
-
+        
         return true
     }
     
@@ -165,10 +177,6 @@ class PracticeViewController: NSViewController {
             let object = context[0] as! NSManagedObject
             practice.name = name
             practice.score = object.value(forKey: self.scoreForKey) as? NSData
-            practice.acc1_name = object.value(forKey: self.acc1NameForKey) as? String
-            practice.acc2_name = object.value(forKey: self.acc2NameForKey) as? String
-            practice.accompany1 = object.value(forKey: self.accompany1ForKey) as? NSData
-            practice.accompany2 = object.value(forKey: self.accompany2ForKey) as? NSData
         } catch {
             return nil
         }
@@ -177,6 +185,7 @@ class PracticeViewController: NSViewController {
     
 }
 
+//MARK: - ComboBox to choose music score
 extension PracticeViewController: NSComboBoxDelegate, NSComboBoxDataSource, NSTabViewDelegate {
     
     func chooseDataToShow(atIndex at: Int) {
@@ -187,11 +196,11 @@ extension PracticeViewController: NSComboBoxDelegate, NSComboBoxDataSource, NSTa
         practiceData = selectFromCoreData(byName: name)
         let image = NSImage(data: practiceData.score as Data)
         self.imageView.image = image!
-        self.accompanyController.setAccompanyData(accData: practiceData)
-        self.accompanyController.dataForAccompanyComboBox(accData: practiceData)
+        self.accompanyController.initAccComboBox(scoreName: practiceData.name)
     }
     
     func comboBoxSelectionDidChange(_ notification: Notification) {
         self.chooseDataToShow(atIndex: self.comboBox.indexOfSelectedItem)
     }
 }
+
