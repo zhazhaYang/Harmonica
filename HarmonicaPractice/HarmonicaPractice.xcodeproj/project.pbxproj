@@ -12,6 +12,7 @@
 		2F7F210222E9569600223010 /* PopupWindows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F210122E9569600223010 /* PopupWindows.swift */; };
 		2F7F212422EAC12C00223010 /* SoundData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F212322EAC12C00223010 /* SoundData.swift */; };
 		2F7F212822EAC33600223010 /* SoundRecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F212722EAC33600223010 /* SoundRecordController.swift */; };
+		2F7F212B22ED902B00223010 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F212A22ED902A00223010 /* Function.swift */; };
 		2FBD22CD22E19EFD00D9106D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD22CC22E19EFD00D9106D /* AppDelegate.swift */; };
 		2FBD22CF22E19EFD00D9106D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD22CE22E19EFD00D9106D /* ViewController.swift */; };
 		2FBD22D222E19EFE00D9106D /* HarmonicaPractice.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD22D022E19EFD00D9106D /* HarmonicaPractice.xcdatamodeld */; };
@@ -27,6 +28,7 @@
 		2F7F210122E9569600223010 /* PopupWindows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupWindows.swift; sourceTree = "<group>"; };
 		2F7F212322EAC12C00223010 /* SoundData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundData.swift; sourceTree = "<group>"; };
 		2F7F212722EAC33600223010 /* SoundRecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundRecordController.swift; sourceTree = "<group>"; };
+		2F7F212A22ED902A00223010 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		2FBD22C922E19EFD00D9106D /* HarmonicaPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HarmonicaPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FBD22CC22E19EFD00D9106D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FBD22CE22E19EFD00D9106D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,7 +58,6 @@
 				2F6FEBBC22E6EB430052E5F9 /* PracticeData.swift */,
 				2F6FEB7B22E587120052E5F9 /* PracticeViewController.swift */,
 				2FDD26C222E8765800FF4557 /* AccompanyController.swift */,
-				2F7F210122E9569600223010 /* PopupWindows.swift */,
 			);
 			path = PracticePage;
 			sourceTree = "<group>";
@@ -70,12 +71,22 @@
 			path = SoundRecordingPage;
 			sourceTree = "<group>";
 		};
+		2F7F212922ED8FE700223010 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				2F7F210122E9569600223010 /* PopupWindows.swift */,
+				2F7F212A22ED902A00223010 /* Function.swift */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
 		2FBD22C022E19EFD00D9106D = {
 			isa = PBXGroup;
 			children = (
 				2FBD22CB22E19EFD00D9106D /* HarmonicaPractice */,
 				2F6FEB7A22E586750052E5F9 /* PracticePage */,
 				2F6FEB7D22E58EAD0052E5F9 /* SoundRecordingPage */,
+				2F7F212922ED8FE700223010 /* Public */,
 				2FBD22CA22E19EFD00D9106D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -93,12 +104,12 @@
 			children = (
 				2FBD22CC22E19EFD00D9106D /* AppDelegate.swift */,
 				2FBD22CE22E19EFD00D9106D /* ViewController.swift */,
+				2FBD231A22E559DF00D9106D /* MainTabController.swift */,
 				2FBD22D322E19F0600D9106D /* Assets.xcassets */,
 				2FBD22D522E19F0600D9106D /* Main.storyboard */,
 				2FBD22D822E19F0600D9106D /* Info.plist */,
 				2FBD22D922E19F0600D9106D /* HarmonicaPractice.entitlements */,
 				2FBD22D022E19EFD00D9106D /* HarmonicaPractice.xcdatamodeld */,
-				2FBD231A22E559DF00D9106D /* MainTabController.swift */,
 			);
 			path = HarmonicaPractice;
 			sourceTree = "<group>";
@@ -188,6 +199,7 @@
 				2F6FEB7C22E587120052E5F9 /* PracticeViewController.swift in Sources */,
 				2FBD22CD22E19EFD00D9106D /* AppDelegate.swift in Sources */,
 				2FDD26C322E8765800FF4557 /* AccompanyController.swift in Sources */,
+				2F7F212B22ED902B00223010 /* Function.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

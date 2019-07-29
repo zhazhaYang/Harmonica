@@ -8,19 +8,24 @@
 
 import Cocoa
 
-class RootSongName: NSObject {
-    var songName: String!
+class RootScoreName: NSObject {
+    var scoreName: String!
     var children = [LeafRecord]()
-    init(songName name: String) {
-        self.songName = name
+    init(scoreName name: String) {
+        self.scoreName = name
     }
 }
 
 class LeafRecord: NSObject {
     var recordName:String!
-    //var recordData:NSData!
     
-    init(name n: String) {
+    init(recordName n: String) {
         self.recordName = n
     }
+}
+
+struct RecordData {
+    var scoreName: String!
+    var recordName: String!
+    var recordData: NSData!
 }

@@ -13,11 +13,13 @@ class MainTabController: NSTabViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        self.switchTabItem(tabItemIndex: 0)
+        switchTabItem(tabItemIndex: 0)
     }
+
     
     public func switchTabItem(tabItemIndex index: Int)
     {
         self.selectedTabViewItemIndex = index
     }
+    
 }

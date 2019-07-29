@@ -47,6 +47,12 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         }
     }
     
+    
+}
+
+//MARK: - TableView Data Source And Delegate
+extension ViewController {
+    
     func numberOfRows(in tableView: NSTableView) -> Int {
         if tableView.identifier!.rawValue == firstTableID {
             return firstStr.count
@@ -55,31 +61,31 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-                var cellID: String? = nil
-                var str: String? = nil
-                var image = NSImage()
-                if tableView.identifier!.rawValue == firstTableID {
-                    cellID = firstCellID
-                    str = firstStr[row]
-                    image = NSImage.init(named: firstImage[row])!
-                    
-                } else if tableView.identifier!.rawValue == secondTableID {
-                    cellID = secondCellID
-                    str = secondStr[row]
-                    image = NSImage.init(named: secondImage[row])!
-                }
+        var cellID: String? = nil
+        var str: String? = nil
+        var image = NSImage()
+        if tableView.identifier!.rawValue == firstTableID {
+            cellID = firstCellID
+            str = firstStr[row]
+            image = NSImage.init(named: firstImage[row])!
+            
+        } else if tableView.identifier!.rawValue == secondTableID {
+            cellID = secondCellID
+            str = secondStr[row]
+            image = NSImage.init(named: secondImage[row])!
+        }
         if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellID!), owner: nil) as? NSTableCellView {
-                    cell.textField?.stringValue = str!
-                    cell.imageView?.image = image
-                    return cell
-                }
-                return nil
+            cell.textField?.stringValue = str!
+            cell.imageView?.image = image
+            return cell
+        }
+        return nil
     }
     
     func selectionShouldChange(in tableView: NSTableView) -> Bool {
         return true
     }
-
+    
     func tableViewSelectionIsChanging(_ notification: Notification) {
         if firstTableView.identifier!.rawValue == (notification.object as? NSTableView)!.identifier!.rawValue {
             secondTableView.deselectAll(nil)
@@ -99,4 +105,3 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
     
 }
-

@@ -38,15 +38,20 @@ class AccompanyController: NSViewController, NSComboBoxDelegate {
     let accNameForKey = "acc_name"
     let accompanyForKey = "accompany"
     
+    let recordEntityName = "Records"
+    let recordNameForKey = "record_name"
+    let recordForKey = "record"
+    
     let noneAcc = "清吹"
     
     var recordsPath: String!
     var recordSetting: [String: Any]!
+    var saveRecordName: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        self.accompanyComboBox.delegate = self
+        accompanyComboBox.delegate = self
         
         recordsPath = NSHomeDirectory() + "/Documents/Records/"
         recordSetting = [AVSampleRateKey: NSNumber(value: 44100.0),//采样率
@@ -162,13 +167,13 @@ class AccompanyController: NSViewController, NSComboBoxDelegate {
     }
     
     @IBAction func recordAction(_ sender: NSButton) {
-        var name: String!
         if sender.state == NSControl.StateValue.on {
-            name = enterTextFieldAlert(message: "先为录音文件取个名字", infomative: "输入:")
-            if name == nil {
+            saveRecordName = enterTextFieldAlert(message: "先为录音文件取个名字", infomative: "输入:")
+            if saveRecordName == nil {
+                recorderButton.state = NSControl.StateValue.off
                 return
             }
-            if !recordSound(recordName: name!) {
+            if !recordSound(recordName: saveRecordName!) {
                 alertRemind(message: "录音初始化失败，请稍后再尝试！")
                 recorderButton.state = NSControl.StateValue.off
                 return
@@ -198,11 +203,18 @@ class AccompanyController: NSViewController, NSComboBoxDelegate {
                 recordTimer.invalidate()
             }
             
-            let path = recordsPath + scoreName + "/" + name + ".acc"
+            let path = recordsPath + scoreName + "/" + saveRecordName + ".acc"
             if FileManager.default.fileExists(atPath: path) {
-                alertRemind(message: "录音成功啦！请到[本地录音]查看！")
+                if saveRecordToCoreData(recordPath: path, recordName: saveRecordName) {
+                    alertRemind(message: "录音成功啦！请到[本地录音]查看！")
+                }
+                else {
+                    alertRemind(message: "录音保存失败了！")
+                }
+            } else {
+                alertRemind(message: "录音保存失败了！")
             }
-            
+            saveRecordName = nil
         }
         
     }
@@ -268,7 +280,7 @@ extension AccompanyController {
                 self.timeSlider.integerValue = 0
                 self.timeSlider.maxValue = self.audioPlayer.duration
                 self.currentTimeLabel.stringValue = "00:00"
-                self.totalTimeLabel.stringValue = self.changeSecToMin(seconds:  self.audioPlayer.duration)
+                self.totalTimeLabel.stringValue = changeSecToMin(seconds:  self.audioPlayer.duration)
                 self.playButton.isEnabled = true
             }
         } else {
@@ -283,24 +295,6 @@ extension AccompanyController {
         
     }
     
-    func changeSecToMin(seconds totalSec: Double) -> String {
-        let min: Int = Int(totalSec) / 60
-        let sec = Int(totalSec) % 60
-        var minStr: String!
-        var secStr: String!
-        if min < 10 {
-            minStr = "0" + String(min)
-        } else {
-            minStr = String(min)
-        }
-        if sec < 10 {
-            secStr = "0" + String(sec)
-        } else {
-            secStr = String(sec)
-        }
-        let str = minStr + ":" + secStr
-        return str
-    }
     
     
     
@@ -334,7 +328,7 @@ extension AccompanyController {
     
     @objc func playTickDown() {
         self.timeSlider.integerValue += 1
-        self.currentTimeLabel.stringValue = self.changeSecToMin(seconds: self.timeSlider.doubleValue)
+        self.currentTimeLabel.stringValue = changeSecToMin(seconds: self.timeSlider.doubleValue)
         if timeSlider.integerValue == Int(timeSlider.maxValue) {
             playTimer.invalidate()
             timeSlider.integerValue = 0
@@ -475,7 +469,7 @@ extension AccompanyController {
         if self.scoreName != nil {
             var path = recordsPath + scoreName
             do {
-                try FileManager.default.createDirectory(atPath:recordsPath, withIntermediateDirectories: true, attributes: nil)
+                try FileManager.default.createDirectory(atPath:path, withIntermediateDirectories: true, attributes: nil)
             } catch {
                 print("创建录音文件夹失败！")
                 return false
@@ -498,7 +492,28 @@ extension AccompanyController {
         return false
     }
     
-    func saveRecordToCoreData(recordPath path: String) {
+    func saveRecordToCoreData(recordPath path: String, recordName rName: String) -> Bool {
+        guard let appdelegate = NSApplication.shared.delegate as? AppDelegate else { return false }
+        let managedContext = appdelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: recordEntityName, in: managedContext)
+        let object = NSManagedObject(entity: entity!, insertInto: managedContext)
+        let url = URL(fileURLWithPath: path)
+        let record = NSData(contentsOf: url)
+        if (record == nil) || (scoreName == nil){
+            return false
+        }
+        object.setValue(scoreName, forKey: scoreNameForKey)
+        object.setValue(rName, forKey: recordNameForKey)
+        object.setValue(record, forKey: recordForKey)
         
+        do {
+            try managedContext.save()
+        } catch {
+            return false
+        }
+        
+        return true
     }
+    
+    
 }

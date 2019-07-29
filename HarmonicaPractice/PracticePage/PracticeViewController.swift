@@ -38,8 +38,8 @@ class PracticeViewController: NSViewController {
             accompanyController = segue.destinationController as? AccompanyController
             accompanyController.loadView()
             if(retrieveName()) {
-                self.noneTipText.isHidden = true
-                self.chooseDataToShow(atIndex: 0)
+                noneTipText.isHidden = true
+                chooseDataToShow(atIndex: 0)
             }
             comboBox.delegate = self
         }
