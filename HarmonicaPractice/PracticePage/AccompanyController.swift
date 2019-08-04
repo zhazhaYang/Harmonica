@@ -53,7 +53,7 @@ class AccompanyController: NSViewController, NSComboBoxDelegate {
         // Do view setup here.
         accompanyComboBox.delegate = self
         
-        recordsPath = NSHomeDirectory() + "/Documents/Records/"
+        recordsPath = NSHomeDirectory() + "/Documents/Records"
         recordSetting = [AVSampleRateKey: NSNumber(value: 44100.0),//采样率
             AVFormatIDKey: NSNumber(value: kAudioFormatMPEG4AAC),//音频格式
             AVLinearPCMBitDepthKey: NSNumber(value: 16),//采样位数
@@ -80,6 +80,10 @@ class AccompanyController: NSViewController, NSComboBoxDelegate {
             return
         } else {
             enterStr = enterTextFieldAlert(message: "为曲谱添加伴奏", infomative: "请输入名称：")
+            if selectOneAccompany(scoreName: scoreName, accName: enterStr) != nil {
+                alertRemind(message: "该名字与现有的伴奏名字重复了！")
+                return
+            }
             createAccData.acc_name = enterStr
         }
         
@@ -96,7 +100,7 @@ class AccompanyController: NSViewController, NSComboBoxDelegate {
         let str = accompanyComboBox.objectValueOfSelectedItem as! String
         if str == noneAcc { return }
         if ensureAlert(message: "删除伴奏", infomativeText: "你确定要删除该伴奏吗？") {
-            if deleteAccompanyByName(accompanyName: str) {
+            if deleteAccompanyByName(scoreName: scoreName, accompanyName: str) {
                 alertRemind(message: "删除成功！")
                 self.accompanyComboBox.removeItem(at: self.accompanyComboBox.indexOfSelectedItem)
                 if self.accompanyComboBox.numberOfItems == 1 {
@@ -173,6 +177,13 @@ class AccompanyController: NSViewController, NSComboBoxDelegate {
                 recorderButton.state = NSControl.StateValue.off
                 return
             }
+            if findRecordByName(scoreName: scoreName, recordName: saveRecordName) {
+                alertRemind(message: "该录音名字与已存在的录音重复了！")
+                recorderButton.state = NSControl.StateValue.off
+                return
+            }
+            
+            
             if !recordSound(recordName: saveRecordName!) {
                 alertRemind(message: "录音初始化失败，请稍后再尝试！")
                 recorderButton.state = NSControl.StateValue.off
@@ -190,7 +201,13 @@ class AccompanyController: NSViewController, NSComboBoxDelegate {
             recordTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.recordTickDown), userInfo: nil, repeats: true)
             playButton.isEnabled = false
         } else {
-            recorder.stop()
+            if recorder != nil {
+                if recorder.isRecording {
+                    recorder.stop()
+                }
+            } else {
+                return
+            }
             recorderButton.title = "开始录音"
             if playTimer != nil {
                 playTimer.invalidate()
@@ -203,14 +220,33 @@ class AccompanyController: NSViewController, NSComboBoxDelegate {
                 recordTimer.invalidate()
             }
             
-            let path = recordsPath + scoreName + "/" + saveRecordName + ".acc"
+            let path = recordsPath + "/" + saveRecordName + ".m4a"
+            let synPath = recordsPath!
             if FileManager.default.fileExists(atPath: path) {
-                if saveRecordToCoreData(recordPath: path, recordName: saveRecordName) {
-                    alertRemind(message: "录音成功啦！请到[本地录音]查看！")
+                var savePath: String!
+                let str = accompanyComboBox.objectValueOfSelectedItem as? String
+                if str == "清吹" || str == nil {
+                    savePath = path
+                } else {
+                    if let url = synthesisAudio(recordPath: path, savePath: synPath) {
+                        savePath = url.path
+                    } else {
+                        alertRemind(message: "录音保存失败了！")
+                    }
+                }
+                
+                if saveRecordToCoreData(recordPath: savePath, recordName: saveRecordName) {
+                    alertRemind(message: "录音成功啦！请到[我的录音]查看！")
+                    do {
+                        try FileManager.default.removeItem(atPath: recordsPath)
+                    } catch {
+                        print("删除本地录音文件夹失败了！")
+                    }
                 }
                 else {
                     alertRemind(message: "录音保存失败了！")
                 }
+                
             } else {
                 alertRemind(message: "录音保存失败了！")
             }
@@ -255,7 +291,7 @@ extension AccompanyController {
                 if nameStr == noneAcc {
                     setAudioPlayer(accompany: nil)
                 } else {
-                    if let accData = selectOneAccompany(accName: nameStr) {
+                    if let accData = selectOneAccompany(scoreName: scoreName, accName: nameStr) {
                         setAudioPlayer(accompany: accData.accompany)
                     }
                 }
@@ -266,7 +302,17 @@ extension AccompanyController {
     }
     
     func setAudioPlayer(accompany acc: NSData?) {
-        
+        if audioPlayer != nil {
+            if audioPlayer.isPlaying {
+                audioPlayer.stop()
+                audioPlayer = nil
+                playButton.state = NSControl.StateValue.off
+                playButton.image = NSImage(named: "play")
+                if playTimer != nil {
+                    playTimer.invalidate()
+                }
+            }
+        }
         if acc != nil {
             do {
                 self.audioPlayer = try AVAudioPlayer(data: acc! as Data)
@@ -300,9 +346,7 @@ extension AccompanyController {
     
     private func openPanelToSelectAccompany(accompanyData data: AccompanyData) {
         var createAccData = data
-        let fileTypes = ["mp3", "wav", "AIFF", "AIFC", "Sd2f", "NeXT", "MPG3",
-                         "MPG2", "MPG1", "ac-3", "adts", "mp4f","m4af", "m4bf",
-                         "caff", "3gp2", "3gpp"]
+        let fileTypes = ["mp3", "wav", "m4a"]
         let openPanel: NSOpenPanel = NSOpenPanel()
         openPanel.canChooseDirectories = false
         openPanel.canChooseFiles = true
@@ -355,11 +399,11 @@ extension AccompanyController {
 //MARK: - Accompany Core Data
 extension AccompanyController {
     
-    func selectOneAccompany(accName acc_name: String) -> AccompanyData? {
+    func selectOneAccompany(scoreName score_name: String, accName acc_name: String) -> AccompanyData? {
         guard let appdelegate = NSApplication.shared.delegate as? AppDelegate else { return nil }
         let managedContext = appdelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        fetchRequest.predicate = NSPredicate(format: " acc_name = %@ ", acc_name)
+        fetchRequest.predicate = NSPredicate(format: "score_name = %@ and acc_name = %@ ", score_name, acc_name)
         do {
             let fetched = try managedContext.fetch(fetchRequest)
             if fetched.count > 0 {
@@ -419,11 +463,11 @@ extension AccompanyController {
         return true
     }
     
-    func deleteAccompanyByName(accompanyName name: String) -> Bool {
+    func deleteAccompanyByName(scoreName sname: String, accompanyName name: String) -> Bool {
         guard let applegate = NSApplication.shared.delegate as? AppDelegate else { return false }
         let managedContext = applegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: self.entityName)
-        fetchRequest.predicate = NSPredicate(format: "acc_name = %@", name)
+        fetchRequest.predicate = NSPredicate(format: "score_name = %@ and acc_name = %@", sname, name)
         do {
             let fetched = try managedContext.fetch(fetchRequest)
             let deleteObject = fetched[0] as! NSManagedObject
@@ -467,14 +511,14 @@ extension AccompanyController {
 extension AccompanyController {
     func recordSound(recordName name: String) -> Bool {
         if self.scoreName != nil {
-            var path = recordsPath + scoreName
+            var path = recordsPath!
             do {
                 try FileManager.default.createDirectory(atPath:path, withIntermediateDirectories: true, attributes: nil)
             } catch {
                 print("创建录音文件夹失败！")
                 return false
             }
-            path = path + "/" + name + ".acc"
+            path = path + "/" + name + ".m4a"
             let url = URL(fileURLWithPath: path)
             do {
                 recorder = try AVAudioRecorder(url: url, settings: recordSetting)
@@ -513,6 +557,97 @@ extension AccompanyController {
         }
         
         return true
+    }
+    
+    func findRecordByName(scoreName sname: String, recordName rname: String) -> Bool {
+        guard let appdelegate = NSApplication.shared.delegate as? AppDelegate else { return false }
+        let contextManaged = appdelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: recordEntityName)
+        fetchRequest.predicate = NSPredicate(format: "score_name = %@ and record_name = %@", sname, rname)
+        do {
+            let fetched = try contextManaged.fetch(fetchRequest)
+            if fetched.count == 0 {
+                return false
+            } else {
+                return true
+            }
+        } catch {
+            return false
+        }
+    }
+    
+    func synthesisAudio(recordPath rPath: String, savePath sPath: String) -> URL? {
+        let rUrl = URL(fileURLWithPath: rPath)
+        var aUrl: URL!
+        let str = accompanyComboBox.objectValueOfSelectedItem as? String
+        if let acc = selectOneAccompany(scoreName: scoreName, accName: str!) {
+            if let type =  mimeType(for: acc.accompany as Data) {
+                let newPath = sPath + "/acc" + type
+                aUrl = URL(fileURLWithPath: newPath)
+                acc.accompany.write(to: aUrl, atomically: true)
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
+        
+        let recordAsset = AVURLAsset(url: rUrl, options: nil)
+        
+        let accompanyAsset = AVURLAsset(url: aUrl, options: nil)
+        let composition: AVMutableComposition = AVMutableComposition()
+        let appendedAudioTrack1: AVMutableCompositionTrack = composition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: kCMPersistentTrackID_Invalid)!
+        let appendedAudioTrack2: AVMutableCompositionTrack = composition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: 0)!
+        let assetTrack1: AVAssetTrack = recordAsset.tracks(withMediaType: AVMediaType.audio)[0]
+        let assetTrack2: AVAssetTrack = accompanyAsset.tracks(withMediaType: AVMediaType.audio)[0]
+        let timeRange1 = CMTimeRangeMake(start: CMTime.zero, duration: recordAsset.duration)
+        let timeRange2 = CMTimeRangeMake(start: CMTime.zero, duration: accompanyAsset.duration)
+        do {
+            try appendedAudioTrack1.insertTimeRange(timeRange1, of: assetTrack1, at: CMTime.zero)
+            try appendedAudioTrack2.insertTimeRange(timeRange2, of: assetTrack2, at: CMTime.zero)
+        } catch {
+            print("拼接失败了！")
+            return nil
+        }
+        
+        let export: AVAssetExportSession = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A)!
+        
+        let path = recordsPath + "/synthesis.m4a"
+        let url = URL(fileURLWithPath: path)
+        export.outputURL = url
+        export.outputFileType = AVFileType.m4a
+        export.exportAsynchronously (
+            completionHandler: { () -> Void in
+                print("export...", export)
+                switch export.status {
+                case .failed:
+                    print("导出失败了！")
+                    break
+                case .completed:
+                    print("导出成功！")
+                    break
+                case .waiting:
+                    print("正在导出中...")
+                    break
+                default:
+                    break
+                }
+        })
+        
+        return url
+    }
+    
+    func mimeType(for data: Data) -> String? {
+        var b: UInt8 = 0
+        data.copyBytes(to: &b, count: 1)
+        switch b {
+        case 0x52:
+            return ".wav"
+        case 0x49:
+            return ".mp3"
+        default:
+            return nil
+        }
     }
     
     

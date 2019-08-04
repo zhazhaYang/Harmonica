@@ -295,7 +295,7 @@ extension SoundRecordController {
             currentTimeSlider.doubleValue = 0.0
             currentTimeSlider.maxValue = audioPlayer.duration
             endTimeLabel.stringValue = changeSecToMin(seconds: audioPlayer.duration)
-            audioPlayer.volume = volumeSlider.floatValue
+            audioPlayer.volume = volumeSlider.floatValue / 100
         }
     }
     
@@ -303,6 +303,7 @@ extension SoundRecordController {
         if audioPlayer != nil {
             audioPlayer.prepareToPlay()
             audioPlayer.play()
+            audioPlayer.volume = volumeSlider.floatValue / 100
             audioPlayer.currentTime = currentTimeSlider.doubleValue
             playTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timeTick), userInfo: nil, repeats: true)
         }
