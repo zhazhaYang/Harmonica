@@ -687,7 +687,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="口琴呀" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="口琴呀" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
                         <windowPositionMask key="initialPositionMask" topStrut="YES"/>
                         <rect key="contentRect" x="632" y="381" width="480" height="270"/>
@@ -951,10 +951,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="881" height="765"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HE7-mH-jNJ">
-                                <rect key="frame" x="20" y="38" width="761" height="680"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="ALp-Tk-yw2"/>
-                            </imageView>
                             <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nlx-ve-Wcj">
                                 <rect key="frame" x="273" y="722" width="183" height="28"/>
                                 <constraints>
@@ -1009,6 +1005,10 @@
                                     <action selector="addMusicScoreClicked:" target="7ID-wj-1LW" id="3ne-eM-b9B"/>
                                 </connections>
                             </button>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HE7-mH-jNJ">
+                                <rect key="frame" x="20" y="38" width="761" height="680"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="ALp-Tk-yw2"/>
+                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="6WH-Tl-x01" firstAttribute="leading" secondItem="nlx-ve-Wcj" secondAttribute="trailing" constant="8" id="0Ww-bO-cIv"/>
@@ -1062,7 +1062,7 @@
                             </textField>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="10b-DM-ysq">
                                 <rect key="frame" x="118" y="5" width="265" height="19"/>
-                                <sliderCell key="cell" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="ndx-lP-4LR"/>
+                                <sliderCell key="cell" state="on" alignment="left" tickMarkPosition="above" sliderType="linear" id="ndx-lP-4LR"/>
                                 <connections>
                                     <action selector="playTimeControl:" target="gfu-uB-TTg" id="5dH-Pc-FTV"/>
                                 </connections>

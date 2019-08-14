@@ -47,7 +47,10 @@ class PracticeViewController: NSViewController {
     }
     
     @IBAction func addMusicScoreClicked(_ sender: NSButton) {
-            self.createName = enterTextFieldAlert(message: "添加曲谱", infomative: "请输入名称：")
+        createName = enterTextFieldAlert(message: "添加曲谱", infomative: "请输入名称：")
+        if createName == nil {
+            return
+        }
         if selectFromCoreData(byName: createName) != nil {
             alertRemind(message: "该名称重复了！")
         } else {

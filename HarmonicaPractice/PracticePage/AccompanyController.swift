@@ -158,6 +158,9 @@ class AccompanyController: NSViewController, NSComboBoxDelegate {
     }
     
     @IBAction func playTimeControl(_ sender: NSSlider) {
+        if timeSlider.maxValue == 0 {
+            return
+        }
         self.audioPlayer.currentTime = self.timeSlider.doubleValue
         currentTimeLabel.stringValue = changeSecToMin(seconds:timeSlider.doubleValue)
         if self.timeSlider.doubleValue == self.timeSlider.maxValue {
