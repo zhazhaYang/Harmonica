@@ -223,32 +223,32 @@ class AccompanyController: NSViewController, NSComboBoxDelegate {
             let path = recordsPath + "/" + saveRecordName + ".m4a"
             let synPath = recordsPath!
             if FileManager.default.fileExists(atPath: path) {
-                var savePath: String!
+                var saveUrl: URL!
                 let str = accompanyComboBox.objectValueOfSelectedItem as? String
                 if str == "清吹" || str == nil {
-                    savePath = path
+                    saveUrl = URL(fileURLWithPath: path)
                 } else {
                     if let url = synthesisAudio(recordPath: path, savePath: synPath) {
-                        savePath = url.path
+                        saveUrl = url
                     } else {
                         alertRemind(message: "录音保存失败了！")
                     }
                 }
                 
-                if saveRecordToCoreData(recordPath: savePath, recordName: saveRecordName) {
+                if saveRecordToCoreData(recordUrl: saveUrl, recordName: saveRecordName) {
                     alertRemind(message: "录音成功啦！请到[我的录音]查看！")
-                    do {
-                        try FileManager.default.removeItem(atPath: recordsPath)
-                    } catch {
-                        print("删除本地录音文件夹失败了！")
-                    }
-                }
-                else {
+                } else {
                     alertRemind(message: "录音保存失败了！")
                 }
                 
             } else {
                 alertRemind(message: "录音保存失败了！")
+            }
+            
+            do {
+                try FileManager.default.removeItem(atPath: recordsPath)
+            } catch {
+                print("删除本地录音文件夹失败了！")
             }
             saveRecordName = nil
         }
@@ -536,12 +536,11 @@ extension AccompanyController {
         return false
     }
     
-    func saveRecordToCoreData(recordPath path: String, recordName rName: String) -> Bool {
+    func saveRecordToCoreData(recordUrl url: URL, recordName rName: String) -> Bool {
         guard let appdelegate = NSApplication.shared.delegate as? AppDelegate else { return false }
         let managedContext = appdelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: recordEntityName, in: managedContext)
         let object = NSManagedObject(entity: entity!, insertInto: managedContext)
-        let url = URL(fileURLWithPath: path)
         let record = NSData(contentsOf: url)
         if (record == nil) || (scoreName == nil){
             return false
@@ -616,6 +615,9 @@ extension AccompanyController {
         let url = URL(fileURLWithPath: path)
         export.outputURL = url
         export.outputFileType = AVFileType.m4a
+        let show = WaitingTextHUD()
+        show.showWaitingWithText(size: self.view.frame.size ,text: "合成录音中", autoRemove: true)
+        var signal = true
         export.exportAsynchronously (
             completionHandler: { () -> Void in
                 print("export...", export)
@@ -632,8 +634,10 @@ extension AccompanyController {
                 default:
                     break
                 }
+                signal = false
         })
-        
+        while signal {}
+        show.removeHUD(nil)
         return url
     }
     

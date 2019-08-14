@@ -100,6 +100,35 @@ class SoundRecordController: NSViewController {
         }
     }
     
+    @IBAction func exportRecordToLocal(_ sender: NSButton) {
+        if let data = getSelectedRecord() {
+            savePanel(recordData: data)
+        }
+    }
+    
+    @IBAction func deleteRecord(_ sender: NSButton) {
+        if outlineView.selectedRow == -1 {
+            return
+        }
+        
+        if !ensureAlert(message: "删除录音", infomativeText: "您确定要删除此项录音吗") {
+            return
+        }
+        
+        if let name = getSelectedName() {
+            for dic in name {
+                if deleteARecord(score: dic.key, record: dic.value) {
+                    setSoundRecordData()
+                    outlineView.reloadData()
+                    alertRemind(message: "删除成功！")
+                    return
+                }
+            }
+        }
+        alertRemind(message: "删除失败!")
+    }
+    
+    
 }
 
 //MARK: - Records Core Data
@@ -163,12 +192,38 @@ extension SoundRecordController {
         fetchRequest.predicate = NSPredicate(format: "score_name = %@ and record_name = %@", sname, rname)
         do {
             let fetched = try managedContext.fetch(fetchRequest)
-            let object = fetched[0] as? NSManagedObject
-            let data = object?.value(forKey: recordForKey) as? NSData
+            if fetched.count == 0 {
+                return nil
+            }
+            let object = fetched[0] as! NSManagedObject
+            let data = object.value(forKey: recordForKey) as? NSData
             return data
         } catch {
             return nil
         }
+    }
+    
+    func deleteARecord(score sname: String, record rname: String) -> Bool {
+        guard let appdelegate = NSApplication.shared.delegate as? AppDelegate else { return false }
+        let managedContext = appdelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult> (entityName: entityName)
+        fetchRequest.predicate = NSPredicate(format: "score_name = %@ and record_name = %@", sname, rname)
+        do {
+            let fetched = try managedContext.fetch(fetchRequest)
+            if fetched.count == 0 {
+                return false
+            }
+            let object = fetched[0] as? NSManagedObject
+            managedContext.delete(object!)
+            do {
+                try managedContext.save()
+            } catch {
+                return false
+            }
+        } catch {
+            return false
+        }
+        return true
     }
     
 }
@@ -217,15 +272,13 @@ extension SoundRecordController: NSOutlineViewDelegate {
                 recordNameLabel.stringValue = recordName
             }
             endPlay()
+            if !setAudioPlayer() {
+                print("录音播放初始化失败了！")
+                alertRemind(message: "录音播放初始化失败了！")
+            }
         } else {
             let row = outlineView.selectedRow
             outlineView.deselectRow(row)
-        }
-    }
-    
-    func outlineViewSelectionDidChange(_ notification: Notification) {
-        if !setAudioPlayer() {
-            print("录音播放出始化失败了！")
         }
     }
     
@@ -350,3 +403,21 @@ extension SoundRecordController {
     
 }
 
+
+// MARK: - Export Record
+extension SoundRecordController {
+    func savePanel(recordData data: NSData) {
+        let panel = NSSavePanel()
+        panel.title = "导出录音"
+        panel.canCreateDirectories = true
+        panel.showsTagField = false
+        panel.allowedFileTypes = ["m4a"]
+        panel.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.modalPanelWindow)))
+        panel.begin { (result) in
+            if result.rawValue == NSApplication.ModalResponse.OK.rawValue {
+                let url = panel.url!
+                data.write(to: url, atomically: true)
+            }
+        }
+    }
+}

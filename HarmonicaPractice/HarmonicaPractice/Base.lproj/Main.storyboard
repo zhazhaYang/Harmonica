@@ -1249,9 +1249,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="185" height="763"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
-                                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
-                                            <color key="gridColor" name="selectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" red="0.93310799870466321" green="0.93310799870466321" blue="0.93310799870466321" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="gridColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <tableColumns>
                                                 <tableColumn width="182" minWidth="16" maxWidth="1000" id="NjH-Ot-SDk">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
@@ -1307,7 +1306,6 @@
                                             </tableColumns>
                                         </outlineView>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </clipView>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="187" id="sAg-Zh-M9H"/>
@@ -1321,14 +1319,6 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J3n-LQ-xLX">
-                                <rect key="frame" x="377" y="356" width="300" height="300"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="G63-uM-1rD"/>
-                                    <constraint firstAttribute="height" constant="300" id="b4M-pF-wuB"/>
-                                </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSBookmarksTemplate" id="h8q-5F-qfC"/>
-                            </imageView>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="Igx-Ni-agK">
                                 <rect key="frame" x="375" y="252" width="48" height="48"/>
                                 <constraints>
@@ -1424,22 +1414,55 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="15r-CW-mFK">
+                                <rect key="frame" x="196" y="737" width="67" height="32"/>
+                                <buttonCell key="cell" type="push" title="删除" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MOs-fq-XuN">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="deleteRecord:" target="XeQ-Lr-CFp" id="Jig-2q-CqG"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b0s-YI-Ffj">
+                                <rect key="frame" x="258" y="737" width="67" height="32"/>
+                                <buttonCell key="cell" type="push" title="导出" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vJe-Q6-zD3">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="exportRecordToLocal:" target="XeQ-Lr-CFp" id="kpe-AM-Juw"/>
+                                </connections>
+                            </button>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J3n-LQ-xLX">
+                                <rect key="frame" x="377" y="356" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="G63-uM-1rD"/>
+                                    <constraint firstAttribute="height" constant="300" id="b4M-pF-wuB"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSBookmarksTemplate" id="h8q-5F-qfC"/>
+                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Igx-Ni-agK" firstAttribute="leading" secondItem="4kl-gg-aO9" secondAttribute="leading" constant="375" id="3O4-wB-3tL"/>
+                            <constraint firstItem="15r-CW-mFK" firstAttribute="leading" secondItem="4kl-gg-aO9" secondAttribute="leading" constant="202" id="5Iv-Fq-cVe"/>
+                            <constraint firstItem="b0s-YI-Ffj" firstAttribute="top" secondItem="4kl-gg-aO9" secondAttribute="top" id="97M-0m-DaK"/>
                             <constraint firstAttribute="trailing" secondItem="6IT-oF-dXl" secondAttribute="trailing" constant="260" id="9dR-Py-zpn"/>
                             <constraint firstAttribute="bottom" secondItem="a8K-fy-mT0" secondAttribute="bottom" constant="212" id="ADb-4p-e1s"/>
                             <constraint firstAttribute="trailing" secondItem="uxO-ci-JkE" secondAttribute="trailing" constant="413" id="At2-Dk-KPf"/>
                             <constraint firstAttribute="bottom" secondItem="Igx-Ni-agK" secondAttribute="bottom" constant="252" id="D0B-Jx-5mX"/>
                             <constraint firstAttribute="bottom" secondItem="5BA-oW-mzr" secondAttribute="bottom" id="EDJ-Ua-KVl"/>
                             <constraint firstAttribute="bottom" secondItem="TpK-tB-ago" secondAttribute="bottom" constant="267" id="G8l-J7-4e9"/>
+                            <constraint firstItem="15r-CW-mFK" firstAttribute="top" secondItem="4kl-gg-aO9" secondAttribute="top" id="GHO-WA-VmV"/>
                             <constraint firstItem="5BA-oW-mzr" firstAttribute="leading" secondItem="4kl-gg-aO9" secondAttribute="leading" id="IGK-bz-i34"/>
                             <constraint firstItem="J3n-LQ-xLX" firstAttribute="centerX" secondItem="4kl-gg-aO9" secondAttribute="centerX" constant="86.5" id="INX-Dy-Qdx"/>
                             <constraint firstAttribute="trailing" secondItem="80m-n3-HwF" secondAttribute="trailing" constant="254" id="Llj-Hw-OVz"/>
                             <constraint firstItem="J3n-LQ-xLX" firstAttribute="centerY" secondItem="4kl-gg-aO9" secondAttribute="centerY" constant="-123.5" id="QvQ-PX-r4a"/>
                             <constraint firstAttribute="trailing" secondItem="a8K-fy-mT0" secondAttribute="trailing" constant="510" id="SIa-aN-DV3"/>
                             <constraint firstAttribute="bottom" secondItem="S0C-c2-Cel" secondAttribute="bottom" constant="213" id="YKG-ty-vic"/>
+                            <constraint firstAttribute="trailing" secondItem="b0s-YI-Ffj" secondAttribute="trailing" constant="562" id="Ybe-0a-9KO"/>
                             <constraint firstAttribute="trailing" secondItem="QJC-a9-HwC" secondAttribute="trailing" constant="206" id="eW2-C0-Rtj"/>
+                            <constraint firstAttribute="trailing" secondItem="15r-CW-mFK" secondAttribute="trailing" constant="624" id="gTF-2O-aLq"/>
                             <constraint firstItem="5BA-oW-mzr" firstAttribute="top" secondItem="4kl-gg-aO9" secondAttribute="top" id="gv7-m9-KkQ"/>
                             <constraint firstAttribute="bottom" secondItem="QJC-a9-HwC" secondAttribute="bottom" constant="213" id="kkW-oB-C0J"/>
                             <constraint firstAttribute="bottom" secondItem="uxO-ci-JkE" secondAttribute="bottom" constant="257" id="m7m-mr-sNC"/>
@@ -1447,6 +1470,7 @@
                             <constraint firstAttribute="trailing" secondItem="S0C-c2-Cel" secondAttribute="trailing" constant="161" id="thc-sl-A3i"/>
                             <constraint firstAttribute="trailing" secondItem="TpK-tB-ago" secondAttribute="trailing" constant="302" id="uZY-Kf-eSz"/>
                             <constraint firstAttribute="bottom" secondItem="80m-n3-HwF" secondAttribute="bottom" constant="266" id="xRW-Fj-hex"/>
+                            <constraint firstItem="b0s-YI-Ffj" firstAttribute="leading" secondItem="4kl-gg-aO9" secondAttribute="leading" constant="264" id="zR4-Nc-GSf"/>
                         </constraints>
                     </view>
                     <connections>

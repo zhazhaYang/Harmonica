@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F07C87423030A2400331855 /* WaitingTextHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F07C87323030A2400331855 /* WaitingTextHUD.swift */; };
+		2F07C87623030A2F00331855 /* WaitingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F07C87523030A2F00331855 /* WaitingTextView.swift */; };
 		2F6FEB7C22E587120052E5F9 /* PracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FEB7B22E587120052E5F9 /* PracticeViewController.swift */; };
 		2F6FEBBD22E6EB430052E5F9 /* PracticeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6FEBBC22E6EB430052E5F9 /* PracticeData.swift */; };
 		2F7F210222E9569600223010 /* PopupWindows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F210122E9569600223010 /* PopupWindows.swift */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F07C87323030A2400331855 /* WaitingTextHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingTextHUD.swift; sourceTree = "<group>"; };
+		2F07C87523030A2F00331855 /* WaitingTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingTextView.swift; sourceTree = "<group>"; };
 		2F6FEB7B22E587120052E5F9 /* PracticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeViewController.swift; sourceTree = "<group>"; };
 		2F6FEBBC22E6EB430052E5F9 /* PracticeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeData.swift; sourceTree = "<group>"; };
 		2F7F210122E9569600223010 /* PopupWindows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupWindows.swift; sourceTree = "<group>"; };
@@ -74,6 +78,8 @@
 		2F7F212922ED8FE700223010 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				2F07C87523030A2F00331855 /* WaitingTextView.swift */,
+				2F07C87323030A2400331855 /* WaitingTextHUD.swift */,
 				2F7F210122E9569600223010 /* PopupWindows.swift */,
 				2F7F212A22ED902A00223010 /* Function.swift */,
 			);
@@ -199,6 +205,8 @@
 				2F6FEB7C22E587120052E5F9 /* PracticeViewController.swift in Sources */,
 				2FBD22CD22E19EFD00D9106D /* AppDelegate.swift in Sources */,
 				2FDD26C322E8765800FF4557 /* AccompanyController.swift in Sources */,
+				2F07C87623030A2F00331855 /* WaitingTextView.swift in Sources */,
+				2F07C87423030A2400331855 /* WaitingTextHUD.swift in Sources */,
 				2F7F212B22ED902B00223010 /* Function.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
