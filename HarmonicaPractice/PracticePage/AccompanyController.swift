@@ -60,7 +60,6 @@ class AccompanyController: NSViewController, NSComboBoxDelegate {
             AVNumberOfChannelsKey: NSNumber(value: 2),//通道数
             AVEncoderAudioQualityKey: NSNumber(value: AVAudioQuality.min.rawValue)//录音质量
         ]
-        
     }
     
 
@@ -616,7 +615,9 @@ extension AccompanyController {
         export.outputURL = url
         export.outputFileType = AVFileType.m4a
         let show = WaitingTextHUD()
-        show.showWaitingWithText(size: self.view.frame.size ,text: "合成录音中", autoRemove: true)
+        if let view = NSApplication.shared.keyWindow?.contentView {
+            show.showWaitingWithText(size: view.frame.size ,text: "合成录音中", autoRemove: true)
+        }
         var signal = true
         export.exportAsynchronously (
             completionHandler: { () -> Void in

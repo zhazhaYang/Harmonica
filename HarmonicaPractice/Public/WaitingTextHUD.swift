@@ -45,7 +45,7 @@ class WaitingTextHUD: NSObject {
         })
         if autoRemove {
             let selec = #selector(removeHUD(_:))
-            perform(selec, with: window, afterDelay: 15)
+            perform(selec, with: window, afterDelay: 60)
         }
     }
     
